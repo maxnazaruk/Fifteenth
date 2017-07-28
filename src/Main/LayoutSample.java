@@ -42,6 +42,8 @@ package Main;
         import java.util.ArrayList;
         import java.util.stream.IntStream;
 
+        import static javafx.scene.layout.BackgroundSize.DEFAULT;
+
 
 /**
  * Sample application that shows examples of the different layout panes
@@ -51,6 +53,7 @@ package Main;
 
 
 public class LayoutSample extends Application {
+    static boolean switcher = true;
     static dqw dqw = new dqw();
     Scene scene1, scene2;
     static int nClicks = 0;
@@ -139,6 +142,11 @@ static String styleSet = "-fx-background-color: #000023;";
         image.setTranslateX(-300);
         image.setMaxWidth(100);
 
+        Button defaultBackground = new Button("default");
+        defaultBackground.setTranslateY(160);
+        defaultBackground.setTranslateX(-300);
+        defaultBackground.setMaxWidth(100);
+
         list = buttons(text, styleSet);
 
 //        IntStream.range(0, 4).forEach(
@@ -148,17 +156,14 @@ static String styleSet = "-fx-background-color: #000023;";
         StackPane layout1 = new StackPane();
         scene1 = new Scene(layout1, 800, 800);
 
-        BackgroundImage myBI= new BackgroundImage(new Image(imageURL),
-                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT);
-//then you set to your node
-        layout1.setBackground(new Background(myBI));
-
-        layout1.getChildren().addAll(reset, start, quit, shuffle, sorting, set, up, down, left, right, image);
-
-
+        layout1.getChildren().addAll(reset, start, quit, shuffle, sorting, set, up, down, left, right, image,defaultBackground);
 
         layout1.getChildren().addAll(list);
+        Image image1 = new Image(String.valueOf(LayoutSample.class.getResource("test.jpg")));
+        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
+        BackgroundImage backgroundImage = new BackgroundImage(image1, BackgroundRepeat.REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        Background background = new Background(backgroundImage);
 
         image.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -167,6 +172,19 @@ static String styleSet = "-fx-background-color: #000023;";
                     dqw.start(primaryStage);
                 } catch (Exception e) {
                     e.printStackTrace();
+                }
+            }
+        });
+
+        defaultBackground.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(switcher) {
+                    layout1.setBackground(background);
+                    switcher = false;
+                }else{
+                    layout1.setStyle("-fx-background-color: #f4f4f4");
+                    switcher = true;
                 }
             }
         });
