@@ -212,11 +212,6 @@ static String styleSet = "-fx-background-color: #000023;";
                 }
             });
 
-        System.out.println("!@#!@#!@#@@@@");
-
-
-
-
             up.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
