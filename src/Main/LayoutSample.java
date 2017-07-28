@@ -122,27 +122,27 @@ static String styleSet = "-fx-background-color: #000023;";
         alert.setContentText("You have successfully completed the puzzle");
 
         Button up = new Button("Up");
-        up.setTranslateY(- 140);
+        up.setTranslateY(-40);
         up.setTranslateX(-300);
         up.setMaxWidth(100);
 
         Button down = new Button("Down");
-        down.setTranslateY(- 100);
+        down.setTranslateY(0);
         down.setTranslateX(-300);
         down.setMaxWidth(100);
 
         Button left = new Button("Left");
-        left.setTranslateY(- 60);
+        left.setTranslateY(40);
         left.setTranslateX(-300);
         left.setMaxWidth(100);
 
         Button right = new Button("Right");
-        right.setTranslateY(- 20);
+        right.setTranslateY(80);
         right.setTranslateX(-300);
         right.setMaxWidth(100);
 
         Button image = new Button("Image");
-        image.setTranslateY(20);
+        image.setTranslateY(-140);
         image.setTranslateX(-300);
         image.setMaxWidth(100);
 
@@ -153,7 +153,7 @@ static String styleSet = "-fx-background-color: #000023;";
 //        );
 
         StackPane layout1 = new StackPane();
-        scene1 = new Scene(layout1, 800, 800, Color.BLACK);
+        scene1 = new Scene(layout1, 800, 650, Color.BLACK);
 
         layout1.getChildren().addAll(reset, start, quit, shuffle, sorting, set, up, down, left, right, image);
 

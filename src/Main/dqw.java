@@ -24,12 +24,12 @@ public class dqw extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         Button back = new Button("Back");
-        back.setTranslateX(-340);
-        back.setTranslateY(-300);
+        back.setTranslateY(200);
+        back.setTranslateX(-300);
         back.setMaxWidth(100);
 
         StackPane layout1 = new StackPane();
-        scene2 = new Scene(layout1, 800, 800, Color.BLACK);
+        scene2 = new Scene(layout1, 800, 650, Color.BLACK);
         layout1.getChildren().addAll(back);
 
         back.setOnAction(new EventHandler<ActionEvent>() {
