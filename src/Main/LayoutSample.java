@@ -26,15 +26,7 @@ package Main;
         import javafx.scene.input.KeyCode;
         import javafx.scene.input.KeyEvent;
         import javafx.scene.input.MouseEvent;
-        import javafx.scene.layout.AnchorPane;
-        import javafx.scene.layout.BorderPane;
-        import javafx.scene.layout.FlowPane;
-        import javafx.scene.layout.GridPane;
-        import javafx.scene.layout.HBox;
-        import javafx.scene.layout.Priority;
-        import javafx.scene.layout.StackPane;
-        import javafx.scene.layout.TilePane;
-        import javafx.scene.layout.VBox;
+        import javafx.scene.layout.*;
         import javafx.scene.paint.Color;
         import javafx.scene.paint.CycleMethod;
         import javafx.scene.paint.LinearGradient;
@@ -66,6 +58,7 @@ public class LayoutSample extends Application {
     static boolean flag = false;
     static Color text = Color.web("#ffffff");
     static int timer = 25;
+    static String imageURL = "https://s-media-cache-ak0.pinimg.com/originals/3c/c7/29/3cc729139e45856c382a8a674366d9d7.jpg";
 
 static String styleSet = "-fx-background-color: #000023;";
 //static String styleSet = "-fx-background-radius: 5em; " +
@@ -153,7 +146,13 @@ static String styleSet = "-fx-background-color: #000023;";
 //        );
 
         StackPane layout1 = new StackPane();
-        scene1 = new Scene(layout1, 800, 650, Color.BLACK);
+        scene1 = new Scene(layout1, 800, 800);
+
+        BackgroundImage myBI= new BackgroundImage(new Image(imageURL),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+//then you set to your node
+        layout1.setBackground(new Background(myBI));
 
         layout1.getChildren().addAll(reset, start, quit, shuffle, sorting, set, up, down, left, right, image);
 
@@ -490,9 +489,6 @@ static String styleSet = "-fx-background-color: #000023;";
     }
 
     public static ArrayList<Button> buttons(Color text, String styleSet){
-
-
-
         Button button1= new Button("1");
         button1.setTextFill(text);
         button1.setStyle(styleSet);
@@ -669,7 +665,7 @@ static String styleSet = "-fx-background-color: #000023;";
 //        button15.setTranslateY(100);
 
         Button zero= new Button();
-        zero.setStyle("-fx-background-color: #F4F4F4");
+        zero.setStyle("-fx-background-color: transparent");
         zero.setMaxWidth(100);
         zero.setMaxHeight(100);
         zero.setTranslateX(-100);
