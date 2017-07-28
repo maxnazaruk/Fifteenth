@@ -21,6 +21,10 @@ package Main;
         import javafx.scene.control.Button;
         import javafx.scene.control.Hyperlink;
         import javafx.scene.control.Label;
+        import javafx.scene.effect.Blend;
+        import javafx.scene.effect.BlendMode;
+        import javafx.scene.effect.DropShadow;
+        import javafx.scene.effect.InnerShadow;
         import javafx.scene.image.Image;
         import javafx.scene.image.ImageView;
         import javafx.scene.input.KeyCode;
@@ -33,6 +37,7 @@ package Main;
         import javafx.scene.paint.Stop;
         import javafx.scene.shape.Rectangle;
         import javafx.scene.text.Font;
+        import javafx.scene.text.FontSmoothingType;
         import javafx.scene.text.FontWeight;
         import javafx.scene.text.Text;
         import javafx.stage.Stage;
@@ -147,6 +152,55 @@ static String styleSet = "-fx-background-color: #000023;";
         defaultBackground.setTranslateX(-300);
         defaultBackground.setMaxWidth(100);
 
+        Text shuffleText = new Text("");
+        shuffleText.setTranslateY(-300);
+        shuffleText.setTranslateX(0);
+        shuffleText.setFill(Color.web("#6df319"));
+        shuffleText.setFont(Font.font("Verdana", 14));
+
+        Blend blend = new Blend();
+        blend.setMode(BlendMode.MULTIPLY);
+
+        DropShadow ds = new DropShadow();
+        ds.setColor(Color.rgb(254, 235, 66, 0.3));
+        ds.setOffsetX(5);
+        ds.setOffsetY(5);
+        ds.setRadius(5);
+        ds.setSpread(0.2);
+
+        blend.setBottomInput(ds);
+
+        DropShadow ds1 = new DropShadow();
+        ds1.setColor(Color.web("#6df319"));
+        ds1.setRadius(20);
+        ds1.setSpread(0.2);
+
+        Blend blend2 = new Blend();
+        blend2.setMode(BlendMode.MULTIPLY);
+
+        InnerShadow is = new InnerShadow();
+        is.setColor(Color.web("#6df319"));
+        is.setRadius(9);
+        is.setChoke(0.8);
+        blend2.setBottomInput(is);
+
+        InnerShadow is1 = new InnerShadow();
+        is1.setColor(Color.web("#6df319"));
+        is1.setRadius(5);
+        is1.setChoke(0.4);
+        blend2.setTopInput(is1);
+
+        Blend blend1 = new Blend();
+        blend1.setMode(BlendMode.MULTIPLY);
+        blend1.setBottomInput(ds1);
+        blend1.setTopInput(blend2);
+
+        blend.setTopInput(blend1);
+
+        shuffleText.setEffect(blend);
+
+
+
         list = buttons(text, styleSet);
 
 //        IntStream.range(0, 4).forEach(
@@ -156,7 +210,7 @@ static String styleSet = "-fx-background-color: #000023;";
         StackPane layout1 = new StackPane();
         scene1 = new Scene(layout1, 800, 800);
 
-        layout1.getChildren().addAll(reset, start, quit, shuffle, sorting, set, up, down, left, right, image,defaultBackground);
+        layout1.getChildren().addAll(reset, start, quit, shuffle, sorting, set, up, down, left, right, image,defaultBackground,shuffleText);
 
         layout1.getChildren().addAll(list);
         Image image1 = new Image(String.valueOf(LayoutSample.class.getResource("test.jpg")));
@@ -216,6 +270,9 @@ static String styleSet = "-fx-background-color: #000023;";
                                 shufflePuzzle(list);
                                 Thread.sleep(25);
                             }
+                            shuffleText.setText("shuffling is complete. Good luck!!!");
+                            Thread.sleep(2000);
+                            shuffleText.setText("");
                             return null;
                         }
                     };
@@ -291,10 +348,10 @@ static String styleSet = "-fx-background-color: #000023;";
             @Override
             public void handle(KeyEvent event) {
                 switch (event.getCode()) {
-                    case UP:    up.fire(); validation(list); break;
-                    case DOWN:  down.fire(); validation(list); break;
-                    case LEFT:  left.fire(); validation(list); break;
-                    case RIGHT: right.fire(); validation(list); break;
+                    case UP:    down.fire(); validation(list); break;
+                    case DOWN:  up.fire(); validation(list); break;
+                    case LEFT:  right.fire(); validation(list); break;
+                    case RIGHT: left.fire(); validation(list); break;
                 }
             }
         });
@@ -346,21 +403,21 @@ static String styleSet = "-fx-background-color: #000023;";
         list.get(10).setTranslateX(100);
         list.get(10).setTranslateY(0);
 
-        list.get(11).setTranslateX(200);
-        list.get(11).setTranslateY(0);
+        list.get(12).setTranslateX(200);
+        list.get(12).setTranslateY(0);
 
         //4------------------------------------------
-        list.get(13).setTranslateX(-100);
-        list.get(13).setTranslateY(100);
+        list.get(11).setTranslateX(-100);
+        list.get(11).setTranslateY(100);
 
         list.get(14).setTranslateX(0);
         list.get(14).setTranslateY(100);
 
-        list.get(12).setTranslateX(100);
-        list.get(12).setTranslateY(100);
-
-        list.get(15).setTranslateX(200);
+        list.get(15).setTranslateX(100);
         list.get(15).setTranslateY(100);
+
+        list.get(13).setTranslateX(200);
+        list.get(13).setTranslateY(100);
 
     }
 
@@ -1057,7 +1114,7 @@ public static final double START_OF_COLUMN = -200.0;
                     down(list);
                 }
 
-                if((placeNumber == (END_OF_ROW/2)-100.0 && zero.getTranslateX() >= placeNumber+100.0) ||
+                if((placeNumber == 0.0 && zero.getTranslateX() >= placeNumber+100.0) ||
                         (placeNumber == targetPlace - 100.0 && zero.getTranslateX() <= placeNumber - 100.0)){
                     while (zero.getTranslateX() != START_OF_ROW){
                         left(list);
@@ -1086,7 +1143,7 @@ public static final double START_OF_COLUMN = -200.0;
 
                 if((placeNumber == 0.0 && zero.getTranslateX() > placeNumber+100.0)  ||
                         (placeNumber == (100.0) && zero.getTranslateX() < placeNumber - 100.0)){
-                    while (zero.getTranslateX() != 0){
+                    while (zero.getTranslateX() != START_OF_ROW){
                         left(list);
                     }
 
@@ -1118,7 +1175,7 @@ public static final double START_OF_COLUMN = -200.0;
                     right(list);
                     up(list);
 
-                    while (zero.getTranslateX() != 0){
+                    while (zero.getTranslateX() != START_OF_ROW){
                         left(list);
                     }
                     down(list);
@@ -1229,6 +1286,13 @@ public static final double START_OF_COLUMN = -200.0;
                                 placeNumber = list.get(number - 1).getTranslateX();
                             }
                         }
+
+                        rowNumber = list.get(number - 1).getTranslateY();
+                        placeNumber = list.get(number - 1).getTranslateX();
+
+                        if (targetPlace == placeNumber && targetRow == rowNumber) {
+                            return;
+                        }
                         if(placeNumber >= targetPlace) {
                             while (true) {
                                 afterMiddleRoll(list, number, targetRow, targetPlace);
@@ -1310,6 +1374,13 @@ public static final double START_OF_COLUMN = -200.0;
                     }
                 }
 
+                rowNumber = list.get(number - 1).getTranslateY();
+                placeNumber = list.get(number - 1).getTranslateX();
+
+                if (targetPlace == placeNumber && targetRow == rowNumber) {
+                    return;
+                }
+
                 if (zero.getTranslateY() == END_OF_COLUMN && zero.getTranslateX() == targetPlace) {
                     while (zero.getTranslateX() != END_OF_ROW) {
                         right(list);
@@ -1321,9 +1392,22 @@ public static final double START_OF_COLUMN = -200.0;
                         }
                     }
                 }
+                rowNumber = list.get(number - 1).getTranslateY();
+                placeNumber = list.get(number - 1).getTranslateX();
+
+                if (targetPlace == placeNumber && targetRow == rowNumber) {
+                    return;
+                }
 
                 if (zero.getTranslateY() == END_OF_COLUMN && zero.getTranslateX() == END_OF_ROW) {
                     up(list);
+                }
+
+                rowNumber = list.get(number - 1).getTranslateY();
+                placeNumber = list.get(number - 1).getTranslateX();
+
+                if (targetPlace == placeNumber && targetRow == rowNumber) {
+                    return;
                 }
 
 
@@ -1331,6 +1415,12 @@ public static final double START_OF_COLUMN = -200.0;
                     while (zero.getTranslateX() != targetPlace) {
                         left(list);
                     }
+                }
+                rowNumber = list.get(number - 1).getTranslateY();
+                placeNumber = list.get(number - 1).getTranslateX();
+
+                if (targetPlace == placeNumber && targetRow == rowNumber) {
+                    return;
                 }
 
             }
