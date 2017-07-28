@@ -3,35 +3,45 @@ package Main;/**
  */
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class dqw extends Application {
-
+    static LayoutSample layoutSample = new LayoutSample();
     public static void main(String[] args) {
-        int x = 100;
-
-        for (int i = 0, size = 4; i < size; i++) {
-
-            for (int j = 0; j < size; j++) {
-
-                System.out.println((j*x) - x);
-                System.out.println((i*x)- 2 *x);
-                System.out.println();
-
-                }
-            }
-        System.out.println();
-
-        ArrayList<Integer> list = new ArrayList<>();
-
-
-//        launch(args);
+        launch(args);
     }
+    Scene scene2;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
 
+        Button back = new Button("Back");
+        back.setTranslateX(-340);
+        back.setTranslateY(-300);
+        back.setMaxWidth(100);
+
+        StackPane layout1 = new StackPane();
+        scene2 = new Scene(layout1, 800, 800, Color.BLACK);
+        layout1.getChildren().addAll(back);
+
+        back.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                layoutSample.start(primaryStage);
+            }
+        });
+
+        layout1.getChildren().addAll();
+        primaryStage.setScene(scene2);
+        primaryStage.show();
     }
 }

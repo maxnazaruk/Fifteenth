@@ -59,6 +59,7 @@ package Main;
 
 
 public class LayoutSample extends Application {
+    static dqw dqw = new dqw();
     Scene scene1, scene2;
     static int nClicks = 0;
     static ArrayList<Button> list = new ArrayList<>();
@@ -140,6 +141,11 @@ static String styleSet = "-fx-background-color: #000023;";
         right.setTranslateX(-300);
         right.setMaxWidth(100);
 
+        Button image = new Button("Image");
+        image.setTranslateY(20);
+        image.setTranslateX(-300);
+        image.setMaxWidth(100);
+
         list = buttons(text, styleSet);
 
 //        IntStream.range(0, 4).forEach(
@@ -149,11 +155,22 @@ static String styleSet = "-fx-background-color: #000023;";
         StackPane layout1 = new StackPane();
         scene1 = new Scene(layout1, 800, 800, Color.BLACK);
 
-        layout1.getChildren().addAll(reset, start, quit, shuffle, sorting, set, up, down, left, right);
+        layout1.getChildren().addAll(reset, start, quit, shuffle, sorting, set, up, down, left, right, image);
 
 
 
         layout1.getChildren().addAll(list);
+
+        image.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    dqw.start(primaryStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
 
         quit.setOnAction(new EventHandler<ActionEvent>() {
