@@ -72,7 +72,7 @@ public class LayoutSample extends Application {
     static int timer = 25;
     static String imageURL = "https://s-media-cache-ak0.pinimg.com/originals/3c/c7/29/3cc729139e45856c382a8a674366d9d7.jpg";
     static String path = LayoutSample.class.getResource("theme1.mp3").toString();
-    static String styleSet = "-fx-background-color: #000023;";
+    static String styleSet = "-fx-background-color: #002223; -fx-background-radius: 0;";
 
     public static final double END_OF_ROW = 200.0;
     public static final double END_OF_COLUMN = 100.0;
@@ -87,7 +87,7 @@ public class LayoutSample extends Application {
     public void start(Stage primaryStage) {
 
         Color textOnHover = Color.web("#000000");
-        String onHover = "-fx-background-color: #ffec8b; ";
+        String onHover = "-fx-background-color: #ffec8b; -fx-background-radius: 0;";
 
         Button reset = new Button("Reset");
         reset.setTranslateY(-300);
