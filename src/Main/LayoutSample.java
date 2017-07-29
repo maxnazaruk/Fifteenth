@@ -17,10 +17,10 @@ package Main;
         import javafx.geometry.VPos;
         import javafx.scene.Node;
         import javafx.scene.Scene;
-        import javafx.scene.control.Alert;
+        import javafx.scene.control.*;
         import javafx.scene.control.Button;
-        import javafx.scene.control.Hyperlink;
         import javafx.scene.control.Label;
+        import javafx.scene.control.MenuItem;
         import javafx.scene.effect.Blend;
         import javafx.scene.effect.BlendMode;
         import javafx.scene.effect.DropShadow;
@@ -70,14 +70,19 @@ public class LayoutSample extends Application {
     static Color text = Color.web("#ffffff");
     static int timer = 25;
     static String imageURL = "https://s-media-cache-ak0.pinimg.com/originals/3c/c7/29/3cc729139e45856c382a8a674366d9d7.jpg";
-
-static String styleSet = "-fx-background-color: #000023;";
+    static String path = LayoutSample.class.getResource("song1.mp3").toString();
+    static String styleSet = "-fx-background-color: #000023;";
 //static String styleSet = "-fx-background-radius: 5em; " +
 //        "-fx-min-width: 100px; " +
 //        "-fx-min-height: 100px; " +
 //        "-fx-max-width: 100px; " +
 //        "-fx-max-height: 100px;" +
 //        "-fx-background-color: #111122; ";
+    public static final double END_OF_ROW = 200.0;
+    public static final double END_OF_COLUMN = 100.0;
+    public static final double START_OF_ROW = -100.0;
+    public static final double START_OF_COLUMN = -200.0;
+
 
 
 
@@ -175,18 +180,41 @@ static String styleSet = "-fx-background-color: #000023;";
         StopMusic.setMinSize(2*25, 2*25);
         StopMusic.setMaxSize(2*25, 2*25);
 
+        MenuButton menuButton = new MenuButton("Playlist...");
+        menuButton.setTranslateX(140);
+        menuButton.setTranslateY(300);
+        menuButton.setMaxWidth(100);
 
+        Media media = new Media(path);
+        MediaPlayer mp = new MediaPlayer(media);
+
+        MenuItem song1 = new MenuItem("John Cena");
+
+        song1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                path = LayoutSample.class.getResource("song1.mp3").toString();
+            }
+        });
+
+        MenuItem song2 = new MenuItem("Theme");
+
+        song2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                path = LayoutSample.class.getResource("theme.mp3").toString();
+
+            }
+        });
+
+        menuButton.getItems().addAll(song1, song2);
 
         list = buttons(text, styleSet);
-
-//        IntStream.range(0, 4).forEach(
-//                i -> button1.fire()
-//        );
 
         StackPane layout1 = new StackPane();
         scene1 = new Scene(layout1, 800, 800);
 
-        layout1.getChildren().addAll(reset, start, quit, shuffle, sorting, set, up, down, left, right, image,defaultBackground,shuffleText, playMusic, StopMusic);
+        layout1.getChildren().addAll(reset, start, quit, shuffle, sorting, set, up, down, left, right, image,defaultBackground,shuffleText, playMusic, StopMusic, menuButton);
 
         layout1.getChildren().addAll(list);
         Image image1 = new Image(String.valueOf(LayoutSample.class.getResource("test.jpg")));
@@ -194,10 +222,6 @@ static String styleSet = "-fx-background-color: #000023;";
         BackgroundImage backgroundImage = new BackgroundImage(image1, BackgroundRepeat.REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);
-
-        String path = LayoutSample.class.getResource("song1.mp3").toString();
-        Media media = new Media(path);
-        MediaPlayer mp = new MediaPlayer(media);
 
         playMusic.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -237,7 +261,6 @@ static String styleSet = "-fx-background-color: #000023;";
             }
         });
 
-
         quit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -254,7 +277,7 @@ static String styleSet = "-fx-background-color: #000023;";
             }
         });
 
-            shuffle.setOnAction(new EventHandler<ActionEvent>() {
+        shuffle.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     Task<Void> task = new Task<Void>() {
@@ -274,14 +297,14 @@ static String styleSet = "-fx-background-color: #000023;";
                 }
             });
 
-            set.setOnAction(new EventHandler<ActionEvent>() {
+        set.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     TestShuffle();
                 }
             });
 
-            sorting.setOnAction(new EventHandler<ActionEvent>() {
+        sorting.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     Task<Void> task = new Task<Void>() {
@@ -297,21 +320,21 @@ static String styleSet = "-fx-background-color: #000023;";
                 }
             });
 
-            up.setOnAction(new EventHandler<ActionEvent>() {
+        up.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     up(list);
                 }
             });
 
-            down.setOnAction(new EventHandler<ActionEvent>() {
+        down.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     down(list);
                 }
             });
 
-            left.setOnAction(new EventHandler<ActionEvent>() {
+        left.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     left(list);
@@ -319,7 +342,7 @@ static String styleSet = "-fx-background-color: #000023;";
                 }
             });
 
-            right.setOnAction(new EventHandler<ActionEvent>() {
+        right.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     right(list);
@@ -335,12 +358,7 @@ static String styleSet = "-fx-background-color: #000023;";
         reset.setOnAction(e -> {
             flag = true;
             restart(primaryStage);
-                });
-
-
-
-
-
+        });
         layout1.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -352,7 +370,6 @@ static String styleSet = "-fx-background-color: #000023;";
                 }
             }
         });
-
 
         primaryStage.setScene(scene1);
         primaryStage.show();
@@ -877,7 +894,6 @@ static String styleSet = "-fx-background-color: #000023;";
                     }
                 }
 
-
     }
 
     public static void down(ArrayList<Button> list){
@@ -906,7 +922,6 @@ static String styleSet = "-fx-background-color: #000023;";
 
 
     }
-
 
     public static void left(ArrayList<Button> list){
         try {
@@ -958,7 +973,6 @@ static String styleSet = "-fx-background-color: #000023;";
 
     }
 
-
     public static double[] findeZero(ArrayList<Button> list){
         double[] x = new double[2];
 
@@ -983,14 +997,7 @@ static String styleSet = "-fx-background-color: #000023;";
         return match;
     }
 
-public static final double END_OF_ROW = 200.0;
-public static final double END_OF_COLUMN = 100.0;
-public static final double START_OF_ROW = -100.0;
-public static final double START_OF_COLUMN = -200.0;
-
-
-
-            public static void enteringMatrix(ArrayList<Button> list){
+    public static void enteringMatrix(ArrayList<Button> list){
                 flag = true;
 
 
@@ -1013,7 +1020,7 @@ public static final double START_OF_COLUMN = -200.0;
 
             }
 
-            public static void lastRowNavigation(ArrayList<Button> list, int number, double targetPlace, double targetRow) {
+    public static void lastRowNavigation(ArrayList<Button> list, int number, double targetPlace, double targetRow) {
                 Button zero = list.get(list.size() - 1);
                 while (zero.getTranslateX() != END_OF_ROW) {
                     right(list);
@@ -1070,7 +1077,7 @@ public static final double START_OF_COLUMN = -200.0;
                 }
             }
 
-            public static void lastRowNumber(ArrayList<Button> list, int number, double targetPlace, double targetRow){
+    public static void lastRowNumber(ArrayList<Button> list, int number, double targetPlace, double targetRow){
                 Button zero = list.get(list.size() - 1);
 
                 double rowNumber = list.get(number - 1).getTranslateY();
@@ -1182,7 +1189,7 @@ public static final double START_OF_COLUMN = -200.0;
                 }
             }
 
-            public static void navigation(ArrayList<Button> list, int number, double targetRow, double targetPlace) {
+    public static void navigation(ArrayList<Button> list, int number, double targetRow, double targetPlace) {
                 Button zero = list.get(list.size() - 1);
 
                 double rowNumber = list.get(number - 1).getTranslateY();
@@ -1324,13 +1331,13 @@ public static final double START_OF_COLUMN = -200.0;
 
             }
 
-            public static void roll(ArrayList<Button> list){
+    public static void roll(ArrayList<Button> list){
                 left(list);
                 up(list);
                 right(list);
             }
 
-            public static void trickMove(ArrayList<Button> list, double targetPlace){
+    public static void trickMove(ArrayList<Button> list, double targetPlace){
                 Button zero = list.get(list.size() - 1);
 
                 up(list);
@@ -1351,13 +1358,13 @@ public static final double START_OF_COLUMN = -200.0;
                 down(list);
             }
 
-            public static void rightRoll(ArrayList<Button> list){
+    public static void rightRoll(ArrayList<Button> list){
                 down(list);
                 left(list);
                 up(list);
             }
 
-            public static void afterMiddleRoll(ArrayList<Button> list, int number, double targetRow, double targetPlace){
+    public static void afterMiddleRoll(ArrayList<Button> list, int number, double targetRow, double targetPlace){
                 Button zero = list.get(list.size() - 1);
 
                 double rowNumber = list.get(number - 1).getTranslateY();
@@ -1425,8 +1432,7 @@ public static final double START_OF_COLUMN = -200.0;
 
             }
 
-
-            public static void onSameRow(ArrayList<Button> lsit, int number, double targetRow, double targetPlace) {
+    public static void onSameRow(ArrayList<Button> lsit, int number, double targetRow, double targetPlace) {
 
                 Button zero = list.get(list.size() - 1);
 
@@ -1495,8 +1501,8 @@ public static final double START_OF_COLUMN = -200.0;
 
                 }
             }
-//
-            public static void moveTargetOnLastRow(ArrayList<Button> list, int number, double targetPlace, double targetRow) {
+
+    public static void moveTargetOnLastRow(ArrayList<Button> list, int number, double targetPlace, double targetRow) {
                 Button zero = list.get(list.size() - 1);
 
                 double rowNumber = list.get(number - 1).getTranslateY();
@@ -1557,7 +1563,7 @@ public static final double START_OF_COLUMN = -200.0;
                 }
             }
 
-            public static void setZeroToRollPosition(ArrayList<Button> list, int number, double targetRow, double targetPlace) {
+    public static void setZeroToRollPosition(ArrayList<Button> list, int number, double targetRow, double targetPlace) {
                 Button zero = list.get(list.size() - 1);
 
                 double rowNumber = list.get(number - 1).getTranslateY();
@@ -1669,7 +1675,7 @@ public static final double START_OF_COLUMN = -200.0;
                 }
             }
 
-            public static void moveNumberOnTheMiddleArea(ArrayList<Button> list, int number, double targetPlace, double targetRow) {
+    public static void moveNumberOnTheMiddleArea(ArrayList<Button> list, int number, double targetPlace, double targetRow) {
                 Button zero = list.get(list.size() - 1);
 
                 double rowNumber = list.get(number - 1).getTranslateY();
@@ -1819,7 +1825,7 @@ public static final double START_OF_COLUMN = -200.0;
                 }
             }
 
-            public static void rollNumber(ArrayList<Button> list, int number, double targetRow, double targetPlace) {
+    public static void rollNumber(ArrayList<Button> list, int number, double targetRow, double targetPlace) {
                 Button zero = list.get(list.size() - 1);
 
                 double rowNumber = list.get(number - 1).getTranslateY();
@@ -1864,7 +1870,7 @@ public static final double START_OF_COLUMN = -200.0;
                 }
             }
 
-            public static void upZeroToNumber(ArrayList<Button> list, int number, double targetRow) {
+    public static void upZeroToNumber(ArrayList<Button> list, int number, double targetRow) {
                 Button zero = list.get(list.size() - 1);
                     double rowNumber = list.get(number - 1).getTranslateY();
                     double placeNumber = list.get(number - 1).getTranslateX();
@@ -1890,7 +1896,7 @@ public static final double START_OF_COLUMN = -200.0;
                 }
             }
 
-            public static void moveLastNumberToThePlace(ArrayList<Button> list, int number, double targetRow, double targetPlace) {
+    public static void moveLastNumberToThePlace(ArrayList<Button> list, int number, double targetRow, double targetPlace) {
                 Button zero = list.get(list.size() - 1);
 
                 double rowNumber = list.get(number - 1).getTranslateY();
@@ -1929,7 +1935,7 @@ public static final double START_OF_COLUMN = -200.0;
                 }
             }
 
-            public static void decomposition1(ArrayList<Button> list, int number, double targetPlace, double targetRow){
+    public static void decomposition1(ArrayList<Button> list, int number, double targetPlace, double targetRow){
 
                 Button zero = list.get(list.size() - 1);
 
@@ -1981,7 +1987,7 @@ public static final double START_OF_COLUMN = -200.0;
                 }
             }
 
-            public static void preLastRowLowMiddleItems(ArrayList<Button> list, int number, double targetPlace ,double targetRow){
+    public static void preLastRowLowMiddleItems(ArrayList<Button> list, int number, double targetPlace ,double targetRow){
                 Button zero = list.get(list.size() - 1);
 
                 double rowNumber = list.get(number - 1).getTranslateY();
@@ -2087,7 +2093,7 @@ public static final double START_OF_COLUMN = -200.0;
                 }
             }
 
-            public static void onLowerPolace(ArrayList<Button> list, int number, double targetRow, double targetPlace){
+    public static void onLowerPolace(ArrayList<Button> list, int number, double targetRow, double targetPlace){
                 Button zero = list.get(list.size() - 1);
 
                 double rowNumber = list.get(number - 1).getTranslateY();
