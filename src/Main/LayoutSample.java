@@ -321,6 +321,7 @@ static String styleSet = "-fx-background-color: #000023;";
                 @Override
                 public void handle(ActionEvent event) {
                     left(list);
+
                 }
             });
 
@@ -817,7 +818,7 @@ static String styleSet = "-fx-background-color: #000023;";
             }
 
         }
-        System.out.println("FINISH");
+
         return true;
     }
 
@@ -880,6 +881,7 @@ static String styleSet = "-fx-background-color: #000023;";
                     }
                 }
 
+
     }
 
     public static void down(ArrayList<Button> list){
@@ -932,6 +934,7 @@ static String styleSet = "-fx-background-color: #000023;";
                     }
                 }
 
+
     }
 
     public static void right(ArrayList<Button> list){
@@ -956,6 +959,7 @@ static String styleSet = "-fx-background-color: #000023;";
                         return;
                     }
                 }
+
     }
 
 
