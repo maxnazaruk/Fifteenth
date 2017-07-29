@@ -195,7 +195,7 @@ static String styleSet = "-fx-background-color: #000023;";
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);
 
-        String path = LayoutSample.class.getResource("song.mp3").toString();
+        String path = LayoutSample.class.getResource("song1.mp3").toString();
         Media media = new Media(path);
         MediaPlayer mp = new MediaPlayer(media);
 
