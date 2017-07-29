@@ -71,7 +71,7 @@ public class LayoutSample extends Application {
     static Color text = Color.web("#ffffff");
     static int timer = 25;
     static String imageURL = "https://s-media-cache-ak0.pinimg.com/originals/3c/c7/29/3cc729139e45856c382a8a674366d9d7.jpg";
-    static String path = LayoutSample.class.getResource("song1.mp3").toString();
+    static String path = LayoutSample.class.getResource("theme1.mp3").toString();
     static String styleSet = "-fx-background-color: #000023;";
 
     public static final double END_OF_ROW = 200.0;
