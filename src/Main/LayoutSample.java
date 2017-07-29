@@ -31,10 +31,13 @@ package Main;
         import javafx.scene.input.KeyEvent;
         import javafx.scene.input.MouseEvent;
         import javafx.scene.layout.*;
+        import javafx.scene.media.Media;
+        import javafx.scene.media.MediaPlayer;
         import javafx.scene.paint.Color;
         import javafx.scene.paint.CycleMethod;
         import javafx.scene.paint.LinearGradient;
         import javafx.scene.paint.Stop;
+        import javafx.scene.shape.Circle;
         import javafx.scene.shape.Rectangle;
         import javafx.scene.text.Font;
         import javafx.scene.text.FontSmoothingType;
@@ -158,46 +161,19 @@ static String styleSet = "-fx-background-color: #000023;";
         shuffleText.setFill(Color.web("#6df319"));
         shuffleText.setFont(Font.font("Verdana", 14));
 
-        Blend blend = new Blend();
-        blend.setMode(BlendMode.MULTIPLY);
+        Button playMusic = new Button("Play");
+        playMusic.setTranslateY(300);
+        playMusic.setTranslateX(260);
+        playMusic.setShape(new Circle(50));
+        playMusic.setMinSize(2*25, 2*25);
+        playMusic.setMaxSize(2*25, 2*25);
 
-        DropShadow ds = new DropShadow();
-        ds.setColor(Color.rgb(254, 235, 66, 0.3));
-        ds.setOffsetX(5);
-        ds.setOffsetY(5);
-        ds.setRadius(5);
-        ds.setSpread(0.2);
-
-        blend.setBottomInput(ds);
-
-        DropShadow ds1 = new DropShadow();
-        ds1.setColor(Color.web("#6df319"));
-        ds1.setRadius(20);
-        ds1.setSpread(0.2);
-
-        Blend blend2 = new Blend();
-        blend2.setMode(BlendMode.MULTIPLY);
-
-        InnerShadow is = new InnerShadow();
-        is.setColor(Color.web("#6df319"));
-        is.setRadius(9);
-        is.setChoke(0.8);
-        blend2.setBottomInput(is);
-
-        InnerShadow is1 = new InnerShadow();
-        is1.setColor(Color.web("#6df319"));
-        is1.setRadius(5);
-        is1.setChoke(0.4);
-        blend2.setTopInput(is1);
-
-        Blend blend1 = new Blend();
-        blend1.setMode(BlendMode.MULTIPLY);
-        blend1.setBottomInput(ds1);
-        blend1.setTopInput(blend2);
-
-        blend.setTopInput(blend1);
-
-        shuffleText.setEffect(blend);
+        Button StopMusic = new Button("Stop");
+        StopMusic.setTranslateY(300);
+        StopMusic.setTranslateX(340);
+        StopMusic.setShape(new Circle(50));
+        StopMusic.setMinSize(2*25, 2*25);
+        StopMusic.setMaxSize(2*25, 2*25);
 
 
 
@@ -210,7 +186,7 @@ static String styleSet = "-fx-background-color: #000023;";
         StackPane layout1 = new StackPane();
         scene1 = new Scene(layout1, 800, 800);
 
-        layout1.getChildren().addAll(reset, start, quit, shuffle, sorting, set, up, down, left, right, image,defaultBackground,shuffleText);
+        layout1.getChildren().addAll(reset, start, quit, shuffle, sorting, set, up, down, left, right, image,defaultBackground,shuffleText, playMusic, StopMusic);
 
         layout1.getChildren().addAll(list);
         Image image1 = new Image(String.valueOf(LayoutSample.class.getResource("test.jpg")));
@@ -218,6 +194,24 @@ static String styleSet = "-fx-background-color: #000023;";
         BackgroundImage backgroundImage = new BackgroundImage(image1, BackgroundRepeat.REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);
+
+        String path = LayoutSample.class.getResource("song.mp3").toString();
+        Media media = new Media(path);
+        MediaPlayer mp = new MediaPlayer(media);
+
+        playMusic.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                mp.play();
+            }
+        });
+
+        StopMusic.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                mp.stop();
+            }
+        });
 
         image.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -345,6 +339,8 @@ static String styleSet = "-fx-background-color: #000023;";
 
 
 
+
+
         layout1.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -408,17 +404,17 @@ static String styleSet = "-fx-background-color: #000023;";
         list.get(12).setTranslateY(0);
 
         //4------------------------------------------
-        list.get(11).setTranslateX(-100);
-        list.get(11).setTranslateY(100);
+        list.get(13).setTranslateX(-100);
+        list.get(13).setTranslateY(100);
 
         list.get(14).setTranslateX(0);
         list.get(14).setTranslateY(100);
 
-        list.get(15).setTranslateX(100);
-        list.get(15).setTranslateY(100);
+        list.get(12).setTranslateX(100);
+        list.get(12).setTranslateY(100);
 
-        list.get(13).setTranslateX(200);
-        list.get(13).setTranslateY(100);
+        list.get(15).setTranslateX(200);
+        list.get(15).setTranslateY(100);
 
     }
 
