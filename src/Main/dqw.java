@@ -46,51 +46,6 @@ public class dqw extends Application {
         back.setTranslateX(-300);
         back.setMaxWidth(100);
 
-        splitImage.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Task<Void> task = new Task<Void>() {
-                    @Override
-                    public Void call() throws Exception {
-                        File file = new File("H:\\Fifteen_15\\15Fif\\src\\Main\\test.jpg");
-                        FileInputStream fis = new FileInputStream(file);
-                        BufferedImage image = ImageIO.read(fis);
-
-                        int rows = 4;
-                        int cols = 4;
-                        int chunks = rows * cols;
-
-                        int chunkWidth = image.getWidth() / cols;
-                        int chunkHeight = image.getHeight() / rows;
-                        int count = 0;
-
-                        BufferedImage imgs[] = new BufferedImage[chunks];
-                        for (int x = 0; x < rows; x++) {
-                            for (int y = 0; y < cols; y++) {
-
-                                imgs[count] = new BufferedImage(chunkWidth, chunkHeight, image.getType());
-
-
-                                Graphics2D gr = imgs[count++].createGraphics();
-                                gr.drawImage(image, 0, 0, chunkWidth, chunkHeight, chunkWidth * y,
-                                        chunkHeight * x, chunkWidth * y + chunkWidth, chunkHeight * x + chunkHeight, null);
-                                gr.dispose();
-                            }
-                        }
-                        System.out.println("Splitting done");
-
-                        //writing mini images into image files
-                        for (int i = 0; i < imgs.length; i++) {
-                            ImageIO.write(imgs[i], "jpg", new File("img" + i + ".jpg"));
-                        }
-                        System.out.println("Mini images created");
-                        return null;
-                    }
-                };
-                new Thread(task).start();
-            }
-        });
-
         Image image = new Image(String.valueOf(dqw.class.getResource("test.jpg")));
         ImageView imageView = new ImageView();
         imageView.setImage(image);
