@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87ebc1fb-b2d4-4808-a96b-21ff335e9c93" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/15Fif/Main/LayoutSample$11.class" afterPath="$PROJECT_DIR$/out/production/15Fif/Main/LayoutSample$11.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/15Fif/Main/LayoutSample.class" afterPath="$PROJECT_DIR$/out/production/15Fif/Main/LayoutSample.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Main/Images.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/15Fif/Main/dqw.class" afterPath="$PROJECT_DIR$/out/production/15Fif/Main/dqw.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main/dqw.java" afterPath="$PROJECT_DIR$/src/Main/dqw.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -138,15 +138,25 @@
       <file leaf-file-name="dqw.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main/dqw.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="240" column="8" lean-forward="false" selection-start-line="240" selection-start-column="8" selection-end-line="240" selection-end-column="8" />
+            <state relative-caret-position="114">
+              <caret line="252" column="38" lean-forward="false" selection-start-line="252" selection-start-column="38" selection-end-line="252" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="class#3769:4335" expanded="false" />
+                <element signature="class#4157:4723" expanded="false" />
                 <element signature="method#splitAndBack#0;class#dqw#0" expanded="false" />
                 <element signature="method#splitAndBack1#0;class#dqw#0" expanded="false" />
                 <element signature="method#generateList#0;class#dqw#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Images.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/Images.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="10" lean-forward="false" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -179,6 +189,7 @@
         <option value="JavaFXApplication" />
         <option value="XSLT Stylesheet" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -199,6 +210,7 @@
         <option value="$PROJECT_DIR$/src/Main/TestPackcage/Test.java" />
         <option value="$PROJECT_DIR$/src/NEWONETEST/RemoveClass.java" />
         <option value="$PROJECT_DIR$/src/Main/LayoutSample.java" />
+        <option value="$PROJECT_DIR$/src/Main/Images.java" />
         <option value="$PROJECT_DIR$/src/Main/dqw.java" />
       </list>
     </option>
@@ -778,7 +790,14 @@
       <option name="project" value="LOCAL" />
       <updated>1501532534724</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="comitment message">
+      <created>1501532556558</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1501532556558</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1011,7 +1030,7 @@
           <caret line="196" column="0" lean-forward="false" selection-start-line="196" selection-start-column="0" selection-end-line="196" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#3769:4335" expanded="false" />
+            <element signature="class#4157:4723" expanded="false" />
             <element signature="method#splitAndBack#0;class#dqw#0" expanded="false" />
             <element signature="method#splitAndBack1#0;class#dqw#0" expanded="false" />
             <element signature="method#generateList#0;class#dqw#0" expanded="false" />
@@ -1151,7 +1170,7 @@
           <caret line="195" column="52" lean-forward="false" selection-start-line="195" selection-start-column="39" selection-end-line="195" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#3769:4335" expanded="false" />
+            <element signature="class#4157:4723" expanded="false" />
             <element signature="method#splitAndBack#0;class#dqw#0" expanded="false" />
             <element signature="method#splitAndBack1#0;class#dqw#0" expanded="false" />
             <element signature="method#generateList#0;class#dqw#0" expanded="false" />
@@ -1291,7 +1310,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#3769:4335" expanded="false" />
+            <element signature="class#4157:4723" expanded="false" />
             <element signature="method#splitAndBack#0;class#dqw#0" expanded="false" />
             <element signature="method#splitAndBack1#0;class#dqw#0" expanded="false" />
             <element signature="method#generateList#0;class#dqw#0" expanded="false" />
@@ -1438,7 +1457,7 @@
           <caret line="31" column="43" lean-forward="false" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#3769:4335" expanded="false" />
+            <element signature="class#4157:4723" expanded="false" />
             <element signature="method#splitAndBack#0;class#dqw#0" expanded="false" />
             <element signature="method#splitAndBack1#0;class#dqw#0" expanded="false" />
             <element signature="method#generateList#0;class#dqw#0" expanded="false" />
@@ -1570,7 +1589,7 @@
           <caret line="31" column="43" lean-forward="false" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#3769:4335" expanded="false" />
+            <element signature="class#4157:4723" expanded="false" />
             <element signature="method#splitAndBack#0;class#dqw#0" expanded="false" />
             <element signature="method#splitAndBack1#0;class#dqw#0" expanded="false" />
             <element signature="method#generateList#0;class#dqw#0" expanded="false" />
@@ -1702,7 +1721,7 @@
           <caret line="19" column="48" lean-forward="true" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#3769:4335" expanded="false" />
+            <element signature="class#4157:4723" expanded="false" />
             <element signature="method#splitAndBack#0;class#dqw#0" expanded="false" />
             <element signature="method#splitAndBack1#0;class#dqw#0" expanded="false" />
             <element signature="method#generateList#0;class#dqw#0" expanded="false" />
@@ -1792,7 +1811,7 @@
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#3769:4335" expanded="false" />
+            <element signature="class#4157:4723" expanded="false" />
             <element signature="method#splitAndBack#0;class#dqw#0" expanded="false" />
             <element signature="method#splitAndBack1#0;class#dqw#0" expanded="false" />
             <element signature="method#generateList#0;class#dqw#0" expanded="false" />
@@ -1882,7 +1901,7 @@
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#3769:4335" expanded="false" />
+            <element signature="class#4157:4723" expanded="false" />
             <element signature="method#splitAndBack#0;class#dqw#0" expanded="false" />
             <element signature="method#splitAndBack1#0;class#dqw#0" expanded="false" />
             <element signature="method#generateList#0;class#dqw#0" expanded="false" />
@@ -2034,13 +2053,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Images.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="10" lean-forward="false" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/dqw.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="240" column="8" lean-forward="false" selection-start-line="240" selection-start-column="8" selection-end-line="240" selection-end-column="8" />
+        <state relative-caret-position="114">
+          <caret line="252" column="38" lean-forward="false" selection-start-line="252" selection-start-column="38" selection-end-line="252" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#3769:4335" expanded="false" />
+            <element signature="class#4157:4723" expanded="false" />
             <element signature="method#splitAndBack#0;class#dqw#0" expanded="false" />
             <element signature="method#splitAndBack1#0;class#dqw#0" expanded="false" />
             <element signature="method#generateList#0;class#dqw#0" expanded="false" />

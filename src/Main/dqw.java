@@ -30,6 +30,7 @@ import java.util.ArrayList;
 public class dqw extends Application {
     static LayoutSample layoutSample = new LayoutSample();
     static String style = "-fx-background-radius: 0; -fs-border: 0; -fx-background-color: transparent";
+    static Images s = Images.BEACH;
 
 
     static ArrayList<Button> list = new ArrayList<>();
@@ -37,6 +38,7 @@ public class dqw extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
     Scene scene2;
 
     @Override
@@ -100,14 +102,18 @@ public class dqw extends Application {
         imagePazzle1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                imagePazzle1.setStyle("-fx-border-color: green; -fx-border-width: 2px");
+                s = Images.BEACH;
+                imagePazzle2.setStyle("-fx-border-color: transparent;-fx-background-color: transparent");
+                imagePazzle1.setStyle("-fx-border-color: green; -fx-border-width: 2px;-fx-background-color: transparent");
             }
         });
 
         imagePazzle2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                imagePazzle2.setStyle("-fx-border-color: green; -fx-border-width: 2px");
+                s = Images.VOLCANO;
+                imagePazzle1.setStyle("-fx-border-color: transparent;-fx-background-color: transparent");
+                imagePazzle2.setStyle("-fx-border-color: green; -fx-border-width: 2px; -fx-background-color: transparent");
             }
         });
 
@@ -134,7 +140,7 @@ public class dqw extends Application {
         primaryStage.show();
     }
 
-    public static void splitAndBack(ArrayList<Button> list){
+    public static void splitAndBack(ArrayList<Button> list) {
         list.get(1).setTranslateY(-100);
         list.get(1).setTranslateX(-100);
 
@@ -189,7 +195,7 @@ public class dqw extends Application {
 
     }
 
-    public static void splitAndBack1(ArrayList<Button> list){
+    public static void splitAndBack1(ArrayList<Button> list) {
         list.get(1).setTranslateY(-90);
         list.get(1).setTranslateX(-100);
 
@@ -237,8 +243,20 @@ public class dqw extends Application {
 
     }
 
-    public static ArrayList<ImageView> viewGenerator(){
-        Image image = new Image(String.valueOf(dqw.class.getResource("puzzle.jpeg")));
+    public static ArrayList<ImageView> viewGenerator() {
+        String imageURL = "";
+        switch (s) {
+            case BEACH:
+                imageURL = "puzzle.jpeg";
+                break;
+            case VOLCANO:
+                imageURL = "volcano.jpg";
+                break;
+            default:
+                imageURL = "puzzle.jpeg";
+
+        }
+        Image image = new Image(String.valueOf(dqw.class.getResource(imageURL)));
         ImageView imageView = new ImageView();
         imageView.setImage(image);
         PixelReader reader = image.getPixelReader();
@@ -334,7 +352,7 @@ public class dqw extends Application {
     }
 
 
-    public static ArrayList<Button> generateList(){
+    public static ArrayList<Button> generateList() {
         Image image = new Image(String.valueOf(dqw.class.getResource("puzzle.jpeg")));
         ImageView imageView = new ImageView();
         imageView.setImage(image);
@@ -356,28 +374,28 @@ public class dqw extends Application {
         WritableImage newImage4 = new WritableImage(reader, 0, 300, 100, 100);
         imageView4.setImage(newImage4);
 
-        Button b = new Button(null , imageView1);
+        Button b = new Button(null, imageView1);
         b.setStyle(style);
         b.setTranslateY(-200);
         b.setTranslateX(-100);
         b.setMaxWidth(100);
         b.setMaxHeight(100);
 
-        Button b1 = new Button(null , imageView2);
+        Button b1 = new Button(null, imageView2);
         b1.setStyle(style);
         b1.setTranslateY(-90);
         b1.setTranslateX(-100);
         b1.setMaxWidth(100);
         b1.setMaxHeight(100);
 
-        Button b2 = new Button(null , imageView3);
+        Button b2 = new Button(null, imageView3);
         b2.setStyle(style);
         b2.setTranslateY(20);
         b2.setTranslateX(-100);
         b2.setMaxWidth(100);
         b2.setMaxHeight(100);
 
-        Button b3 = new Button(null , imageView4);
+        Button b3 = new Button(null, imageView4);
         b3.setStyle(style);
         b3.setTranslateY(130);
         b3.setTranslateX(-100);
@@ -401,28 +419,28 @@ public class dqw extends Application {
         WritableImage newImage14 = new WritableImage(reader, 100, 300, 100, 100);
         imageView14.setImage(newImage14);
 
-        Button b11 = new Button(null , imageView11);
+        Button b11 = new Button(null, imageView11);
         b11.setStyle(style);
         b11.setTranslateY(-200);
         b11.setTranslateX(10);
         b11.setMaxWidth(100);
         b11.setMaxHeight(100);
 
-        Button b12 = new Button(null , imageView12);
+        Button b12 = new Button(null, imageView12);
         b12.setStyle(style);
         b12.setTranslateY(-90);
         b12.setTranslateX(10);
         b12.setMaxWidth(100);
         b12.setMaxHeight(100);
 
-        Button b13 = new Button(null , imageView13);
+        Button b13 = new Button(null, imageView13);
         b13.setStyle(style);
         b13.setTranslateY(20);
         b13.setTranslateX(10);
         b13.setMaxWidth(100);
         b13.setMaxHeight(100);
 
-        Button b14 = new Button(null , imageView14);
+        Button b14 = new Button(null, imageView14);
         b14.setStyle(style);
         b14.setTranslateY(130);
         b14.setTranslateX(10);
@@ -446,28 +464,28 @@ public class dqw extends Application {
         WritableImage newImage24 = new WritableImage(reader, 200, 300, 100, 100);
         imageView24.setImage(newImage24);
 
-        Button b21 = new Button(null , imageView21);
+        Button b21 = new Button(null, imageView21);
         b21.setStyle(style);
         b21.setTranslateY(-200);
         b21.setTranslateX(120);
         b21.setMaxWidth(100);
         b21.setMaxHeight(100);
 
-        Button b22 = new Button(null , imageView22);
+        Button b22 = new Button(null, imageView22);
         b22.setStyle(style);
         b22.setTranslateY(-90);
         b22.setTranslateX(120);
         b22.setMaxWidth(100);
         b22.setMaxHeight(100);
 
-        Button b23 = new Button(null , imageView23);
+        Button b23 = new Button(null, imageView23);
         b23.setStyle(style);
         b23.setTranslateY(20);
         b23.setTranslateX(120);
         b23.setMaxWidth(100);
         b23.setMaxHeight(100);
 
-        Button b24 = new Button(null , imageView24);
+        Button b24 = new Button(null, imageView24);
         b24.setStyle(style);
         b24.setTranslateY(130);
         b24.setTranslateX(120);
@@ -491,28 +509,28 @@ public class dqw extends Application {
         WritableImage newImage34 = new WritableImage(reader, 300, 300, 100, 100);
         imageView34.setImage(newImage34);
 
-        Button b31 = new Button(null , imageView31);
+        Button b31 = new Button(null, imageView31);
         b31.setStyle(style);
         b31.setTranslateY(-200);
         b31.setTranslateX(230);
         b31.setMaxWidth(100);
         b31.setMaxHeight(100);
 
-        Button b32 = new Button(null , imageView32);
+        Button b32 = new Button(null, imageView32);
         b32.setStyle(style);
         b32.setTranslateY(-90);
         b32.setTranslateX(230);
         b32.setMaxWidth(100);
         b32.setMaxHeight(100);
 
-        Button b33 = new Button(null , imageView33);
+        Button b33 = new Button(null, imageView33);
         b33.setStyle(style);
         b33.setTranslateY(20);
         b33.setTranslateX(230);
         b33.setMaxWidth(100);
         b33.setMaxHeight(100);
 
-        Button b34 = new Button(null , imageView34);
+        Button b34 = new Button(null, imageView34);
         b34.setStyle(style);
         b34.setTranslateY(130);
         b34.setTranslateX(230);
