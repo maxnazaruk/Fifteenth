@@ -68,8 +68,7 @@ package Main;
 public class LayoutSample extends Application {
     static boolean switcher = true;
     static dqw dqw = new dqw();
-    Scene scene1, scene2;
-    static int nClicks = 0;
+    Scene scene1;
     static ArrayList<Button> list = new ArrayList<>();
     static ArrayList<ImageView> iView = new ArrayList<>();
 
@@ -998,7 +997,6 @@ public class LayoutSample extends Application {
             list.get(14).setGraphic(null);
             list.get(14).setStyle(styleSet);
             flagSwitcher = !flagSwitcher;
-
         }
 
     }
