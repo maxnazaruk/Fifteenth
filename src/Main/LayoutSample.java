@@ -4,6 +4,9 @@ package Main;
  * Created by Max on 7/25/2017.
  */
 
+        import javafx.animation.Animation;
+        import javafx.animation.KeyFrame;
+        import javafx.animation.Timeline;
         import javafx.application.Application;
         import javafx.application.Platform;
         import javafx.beans.binding.Bindings;
@@ -49,6 +52,7 @@ package Main;
         import java.awt.*;
         import java.time.Duration;
         import java.util.ArrayList;
+        import java.util.Calendar;
         import java.util.stream.IntStream;
 
         import static javafx.scene.layout.BackgroundSize.DEFAULT;
@@ -67,12 +71,17 @@ public class LayoutSample extends Application {
     Scene scene1, scene2;
     static int nClicks = 0;
     static ArrayList<Button> list = new ArrayList<>();
+    static ArrayList<ImageView> iView = new ArrayList<>();
+
+
     static boolean flag = false;
+    static boolean flagSwitcher = true;
     static Color text = Color.web("#ffffff");
     static int timer = 25;
     static String imageURL = "https://s-media-cache-ak0.pinimg.com/originals/3c/c7/29/3cc729139e45856c382a8a674366d9d7.jpg";
     static String path = LayoutSample.class.getResource("theme1.mp3").toString();
-    static String styleSet = "-fx-background-color: #002223; -fx-background-radius: 0;";
+    static String styleSet = "-fx-background-color: #000023;";
+    static String imageStyle = "-fx-background-color: transparent";
 
     public static final double END_OF_ROW = 200.0;
     public static final double END_OF_COLUMN = 100.0;
@@ -87,7 +96,7 @@ public class LayoutSample extends Application {
     public void start(Stage primaryStage) {
 
         Color textOnHover = Color.web("#000000");
-        String onHover = "-fx-background-color: #ffec8b; -fx-background-radius: 0;";
+        String onHover = "-fx-background-color: #ffec8b;";
 
         Button reset = new Button("Reset");
         reset.setTranslateY(-300);
@@ -191,18 +200,19 @@ public class LayoutSample extends Application {
         menuButton.setTranslateY(300);
         menuButton.setMaxWidth(100);
 
-
         MenuItem song1 = new MenuItem("John Cena");
 
         Media media = new Media(path);
-        MediaPlayer mp = new MediaPlayer(media);
+        Media media1 = new Media(LayoutSample.class.getResource("song1.mp3").toString());
+        Media media2 = new Media(LayoutSample.class.getResource("theme.mp3").toString());
+        final MediaPlayer[] mp = {new MediaPlayer(media), new MediaPlayer(media1), new MediaPlayer(media2)};
 
         song1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                path = LayoutSample.class.getResource("song1.mp3").toString();
-                System.out.println(path);
-
+                StopMusic.fire();
+                mp[0].play();
+                System.out.println(Thread.currentThread().getName());
             }
         });
         MenuItem song2 = new MenuItem("Theme");
@@ -210,8 +220,9 @@ public class LayoutSample extends Application {
         song2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                path = LayoutSample.class.getResource("theme.mp3").toString();
-                System.out.println(path);
+                StopMusic.fire();
+                mp[2].play();
+                System.out.println(Thread.currentThread().getName());
             }
         });
 
@@ -240,7 +251,6 @@ public class LayoutSample extends Application {
 
         Background background = new Background(backgroundImage);
 
-
         cheatButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -250,24 +260,21 @@ public class LayoutSample extends Application {
             }
         });
 
-        mp.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                
-            }
-        });
-
         playMusic.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                mp.play();
+                StopMusic.fire();
+                       mp[1].play();
+                System.out.println(Thread.currentThread().getName());
             }
         });
 
         StopMusic.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                mp.stop();
+                mp[0].stop();
+                mp[1].stop();
+                mp[2].stop();
             }
         });
 
@@ -334,7 +341,7 @@ public class LayoutSample extends Application {
         set.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    TestShuffle();
+                    imageButtons(dqw);
                 }
             });
 
@@ -344,9 +351,7 @@ public class LayoutSample extends Application {
                     Task<Void> task = new Task<Void>() {
                         @Override
                         public Void call() throws Exception {
-
                             enteringMatrix(list);
-
                             return null;
                         }
                     };
@@ -470,25 +475,28 @@ public class LayoutSample extends Application {
     }
 
     public static void mouseOnHover(Button button, String onHover, Color textOnHover, String styleSet, Color text){
-        if(button.getId() != "0"){
-        button.setOnMouseMoved(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                button.setStyle(onHover);
-                button.setTextFill(textOnHover);
 
+        if(flagSwitcher) {
+            if (button.getId() != "0") {
+                button.setOnMouseMoved(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        button.setStyle(onHover);
+                        button.setTextFill(textOnHover);
+
+                    }
+                });
             }
-        });
-        }
 
-        if(button.getId() != "0") {
-            button.setOnMouseExited(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    button.setStyle(styleSet);
-                    button.setTextFill(text);
-                }
-            });
+            if (button.getId() != "0") {
+                button.setOnMouseExited(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        button.setStyle(styleSet);
+                        button.setTextFill(text);
+                    }
+                });
+            }
         }
     }
 
@@ -840,6 +848,140 @@ public class LayoutSample extends Application {
                 onMouseAction(b, list, primaryStage, alert);
 
             }
+
+    }
+
+    public static void imageButtons(dqw o){
+        ArrayList<ImageView> iList = o.viewGenerator();
+
+        if(flagSwitcher) {
+
+            list.get(0).setGraphic(iList.get(0));
+            list.get(0).setStyle(imageStyle);
+            list.get(0).setText(null);
+
+            list.get(1).setGraphic(iList.get(4));
+            list.get(1).setStyle(imageStyle);
+            list.get(1).setText(null);
+
+            list.get(2).setGraphic(iList.get(8));
+            list.get(2).setStyle(imageStyle);
+            list.get(2).setText(null);
+
+            list.get(3).setGraphic(iList.get(12));
+            list.get(3).setStyle(imageStyle);
+            list.get(3).setText(null);
+
+
+            list.get(4).setGraphic(iList.get(1));
+            list.get(4).setStyle(imageStyle);
+            list.get(4).setText(null);
+
+            list.get(5).setGraphic(iList.get(5));
+            list.get(5).setStyle(imageStyle);
+            list.get(5).setText(null);
+
+            list.get(6).setGraphic(iList.get(9));
+            list.get(6).setStyle(imageStyle);
+            list.get(6).setText(null);
+
+            list.get(7).setGraphic(iList.get(13));
+            list.get(7).setStyle(imageStyle);
+            list.get(7).setText(null);
+
+
+            list.get(8).setGraphic(iList.get(2));
+            list.get(8).setStyle(imageStyle);
+            list.get(8).setText(null);
+
+            list.get(9).setGraphic(iList.get(6));
+            list.get(9).setStyle(imageStyle);
+            list.get(9).setText(null);
+
+            list.get(10).setGraphic(iList.get(10));
+            list.get(10).setStyle(imageStyle);
+            list.get(10).setText(null);
+
+            list.get(11).setGraphic(iList.get(14));
+            list.get(11).setStyle(imageStyle);
+            list.get(11).setText(null);
+
+            list.get(12).setGraphic(iList.get(3));
+            list.get(12).setStyle(imageStyle);
+            list.get(12).setText(null);
+
+            list.get(13).setGraphic(iList.get(7));
+            list.get(13).setStyle(imageStyle);
+            list.get(13).setText(null);
+
+            list.get(14).setGraphic(iList.get(11));
+            list.get(14).setStyle(imageStyle);
+            list.get(14).setText(null);
+
+            flagSwitcher = !flagSwitcher;
+        }else{
+            list.get(0).setText("1");
+            list.get(0).setGraphic(null);
+            list.get(0).setStyle(styleSet);
+
+            list.get(1).setText("2");
+            list.get(1).setGraphic(null);
+            list.get(1).setStyle(styleSet);
+
+            list.get(2).setText("3");
+            list.get(2).setGraphic(null);
+            list.get(2).setStyle(styleSet);
+
+            list.get(3).setText("4");
+            list.get(3).setGraphic(null);
+            list.get(3).setStyle(styleSet);
+
+            list.get(4).setText("5");
+            list.get(4).setGraphic(null);
+            list.get(4).setStyle(styleSet);
+
+            list.get(5).setText("6");
+            list.get(5).setGraphic(null);
+            list.get(5).setStyle(styleSet);
+
+            list.get(6).setText("7");
+            list.get(6).setGraphic(null);
+            list.get(6).setStyle(styleSet);
+
+            list.get(7).setText("8");
+            list.get(7).setGraphic(null);
+            list.get(7).setStyle(styleSet);
+
+            list.get(8).setText("9");
+            list.get(8).setGraphic(null);
+            list.get(8).setStyle(styleSet);
+
+            list.get(9).setText("10");
+            list.get(9).setGraphic(null);
+            list.get(9).setStyle(styleSet);
+
+            list.get(10).setText("11");
+            list.get(10).setGraphic(null);
+            list.get(10).setStyle(styleSet);
+
+            list.get(11).setText("12");
+            list.get(11).setGraphic(null);
+            list.get(11).setStyle(styleSet);
+
+            list.get(12).setText("13");
+            list.get(12).setGraphic(null);
+            list.get(12).setStyle(styleSet);
+
+            list.get(13).setText("14");
+            list.get(13).setGraphic(null);
+            list.get(13).setStyle(styleSet);
+
+            list.get(14).setText("15");
+            list.get(14).setGraphic(null);
+            list.get(14).setStyle(styleSet);
+            flagSwitcher = !flagSwitcher;
+
+        }
 
     }
 
