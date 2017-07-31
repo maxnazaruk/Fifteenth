@@ -353,11 +353,11 @@ public class LayoutSample extends Application {
                 public void handle(ActionEvent event) {
                     imageButtons(dqw);
                     if(!flagSwitcher){
-                       primaryStage.setWidth(1600);
-                        layout1.getChildren().addAll(imagePazzleView);
+//                       primaryStage.setWidth(1600);
+//                        layout1.getChildren().addAll(imagePazzleView);
                     }else{
-                        primaryStage.setWidth(800);
-                        layout1.getChildren().remove(imagePazzleView);
+//                        primaryStage.setWidth(800);
+//                        layout1.getChildren().remove(imagePazzleView);
                     }
                 }
             });

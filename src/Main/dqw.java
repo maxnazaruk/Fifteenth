@@ -30,7 +30,9 @@ import java.util.ArrayList;
 public class dqw extends Application {
     static LayoutSample layoutSample = new LayoutSample();
     static String style = "-fx-background-radius: 0; -fs-border: 0; -fx-background-color: transparent";
-static ArrayList<Button> list = new ArrayList<>();
+
+
+    static ArrayList<Button> list = new ArrayList<>();
 
     public static void main(String[] args) {
         launch(args);
@@ -39,11 +41,39 @@ static ArrayList<Button> list = new ArrayList<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Image image2 = new Image(String.valueOf(dqw.class.getResource("puzzle.jpeg")));
+        ImageView imageView2 = new ImageView();
+        imageView2.setImage(image2);
+
+        Image image1 = new Image(String.valueOf(dqw.class.getResource("volcano.jpg")));
+        ImageView imageView1 = new ImageView();
+        imageView1.setImage(image1);
 
         Button back = new Button("Back");
         back.setTranslateY(-200);
         back.setTranslateX(-300);
         back.setMaxWidth(100);
+
+        Button imagePazzle1 = new Button();
+        imagePazzle1.setStyle("-fx-background-color: transparent");
+        imageView2.setFitWidth(200);
+        imageView2.setFitHeight(200);
+        imagePazzle1.setTranslateY(-200);
+        imagePazzle1.setTranslateX(-100);
+        imagePazzle1.setMaxWidth(10);
+        imagePazzle1.setMaxHeight(10);
+        imagePazzle1.setGraphic(imageView2);
+
+        Button imagePazzle2 = new Button();
+        imagePazzle2.setStyle("-fx-background-color: transparent");
+        imageView1.setFitWidth(200);
+        imageView1.setFitHeight(200);
+        imagePazzle2.setTranslateY(-200);
+        imagePazzle2.setTranslateX(120);
+        imagePazzle2.setMaxWidth(10);
+        imagePazzle2.setMaxHeight(10);
+        imagePazzle2.setGraphic(imageView1);
+
 
         Button splitImage = new Button("Splitting");
         splitImage.setTranslateY(-160);
@@ -55,8 +85,8 @@ static ArrayList<Button> list = new ArrayList<>();
 
         StackPane layout1 = new StackPane();
         scene2 = new Scene(layout1, 800, 650, Color.BLACK);
-        layout1.getChildren().addAll(back, splitImage);
-        layout1.getChildren().addAll(list);
+        layout1.getChildren().addAll(back, splitImage, imagePazzle1, imagePazzle2);
+//        layout1.getChildren().addAll(list);
 //        layout1.getChildren().addAll(back, splitImage);
 
         back.setOnAction(new EventHandler<ActionEvent>() {
@@ -64,6 +94,20 @@ static ArrayList<Button> list = new ArrayList<>();
             public void handle(ActionEvent event) {
 
                 layoutSample.start(primaryStage);
+            }
+        });
+
+        imagePazzle1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                imagePazzle1.setStyle("-fx-border-color: green; -fx-border-width: 2px");
+            }
+        });
+
+        imagePazzle2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                imagePazzle2.setStyle("-fx-border-color: green; -fx-border-width: 2px");
             }
         });
 
