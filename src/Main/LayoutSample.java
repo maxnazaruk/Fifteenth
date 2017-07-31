@@ -200,6 +200,16 @@ public class LayoutSample extends Application {
         menuButton.setTranslateY(300);
         menuButton.setMaxWidth(100);
 
+        Label imagePazzleView = new Label();
+        imagePazzleView.setTranslateX(500);
+        imagePazzleView.setTranslateY(-50);
+        imagePazzleView.setMaxWidth(400);
+        imagePazzleView.setMaxHeight(400);
+        Image imagePazzle = new Image(String.valueOf(dqw.class.getResource("puzzle.jpeg")));
+        ImageView imageView = new ImageView();
+        imageView.setImage(imagePazzle);
+        imagePazzleView.setGraphic(imageView);
+
         MenuItem song1 = new MenuItem("John Cena");
 
         Media media = new Media(path);
@@ -342,6 +352,13 @@ public class LayoutSample extends Application {
                 @Override
                 public void handle(ActionEvent event) {
                     imageButtons(dqw);
+                    if(!flagSwitcher){
+                       primaryStage.setWidth(1600);
+                        layout1.getChildren().addAll(imagePazzleView);
+                    }else{
+                        primaryStage.setWidth(800);
+                        layout1.getChildren().remove(imagePazzleView);
+                    }
                 }
             });
 
