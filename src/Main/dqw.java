@@ -31,6 +31,8 @@ public class dqw extends Application {
     static LayoutSample layoutSample = new LayoutSample();
     static String style = "-fx-background-radius: 0; -fs-border: 0; -fx-background-color: transparent";
     static Images s = Images.BEACH;
+    static String unselectStyle = "-fx-border-color: transparent;-fx-background-color: transparent";
+    static String selectStyle = "-fx-border-color: green; -fx-border-width: 2px;-fx-background-color: transparent";
 
 
     static ArrayList<Button> list = new ArrayList<>();
@@ -51,6 +53,14 @@ public class dqw extends Application {
         ImageView imageView1 = new ImageView();
         imageView1.setImage(image1);
 
+        Image image3 = new Image(String.valueOf(dqw.class.getResource("autmn.jpg")));
+        ImageView imageView3 = new ImageView();
+        imageView3.setImage(image3);
+
+        Image image4 = new Image(String.valueOf(dqw.class.getResource("winter.jpg")));
+        ImageView imageView4 = new ImageView();
+        imageView4.setImage(image4);
+
         Button back = new Button("Back");
         back.setTranslateY(-200);
         back.setTranslateX(-300);
@@ -62,8 +72,6 @@ public class dqw extends Application {
         imageView2.setFitHeight(200);
         imagePazzle1.setTranslateY(-200);
         imagePazzle1.setTranslateX(-100);
-        imagePazzle1.setMaxWidth(10);
-        imagePazzle1.setMaxHeight(10);
         imagePazzle1.setGraphic(imageView2);
 
         Button imagePazzle2 = new Button();
@@ -72,9 +80,23 @@ public class dqw extends Application {
         imageView1.setFitHeight(200);
         imagePazzle2.setTranslateY(-200);
         imagePazzle2.setTranslateX(120);
-        imagePazzle2.setMaxWidth(10);
-        imagePazzle2.setMaxHeight(10);
         imagePazzle2.setGraphic(imageView1);
+
+        Button imagePazzle3 = new Button();
+        imagePazzle3.setStyle("-fx-background-color: transparent");
+        imageView3.setFitWidth(200);
+        imageView3.setFitHeight(200);
+        imagePazzle3.setTranslateY(20);
+        imagePazzle3.setTranslateX(-100);
+        imagePazzle3.setGraphic(imageView3);
+
+        Button imagePazzle4 = new Button();
+        imagePazzle4.setStyle("-fx-background-color: transparent");
+        imageView4.setFitWidth(200);
+        imageView4.setFitHeight(200);
+        imagePazzle4.setTranslateY(20);
+        imagePazzle4.setTranslateX(120);
+        imagePazzle4.setGraphic(imageView4);
 
 
         Button splitImage = new Button("Splitting");
@@ -87,7 +109,7 @@ public class dqw extends Application {
 
         StackPane layout1 = new StackPane();
         scene2 = new Scene(layout1, 800, 650, Color.BLACK);
-        layout1.getChildren().addAll(back, splitImage, imagePazzle1, imagePazzle2);
+        layout1.getChildren().addAll(back, splitImage, imagePazzle1, imagePazzle2, imagePazzle3, imagePazzle4);
 //        layout1.getChildren().addAll(list);
 //        layout1.getChildren().addAll(back, splitImage);
 
@@ -103,8 +125,10 @@ public class dqw extends Application {
             @Override
             public void handle(ActionEvent event) {
                 s = Images.BEACH;
-                imagePazzle2.setStyle("-fx-border-color: transparent;-fx-background-color: transparent");
-                imagePazzle1.setStyle("-fx-border-color: green; -fx-border-width: 2px;-fx-background-color: transparent");
+                imagePazzle2.setStyle(unselectStyle);
+                imagePazzle3.setStyle(unselectStyle);
+                imagePazzle4.setStyle(unselectStyle);
+                imagePazzle1.setStyle(selectStyle);
             }
         });
 
@@ -112,8 +136,32 @@ public class dqw extends Application {
             @Override
             public void handle(ActionEvent event) {
                 s = Images.VOLCANO;
-                imagePazzle1.setStyle("-fx-border-color: transparent;-fx-background-color: transparent");
-                imagePazzle2.setStyle("-fx-border-color: green; -fx-border-width: 2px; -fx-background-color: transparent");
+                imagePazzle2.setStyle(selectStyle);
+                imagePazzle3.setStyle(unselectStyle);
+                imagePazzle4.setStyle(unselectStyle);
+                imagePazzle1.setStyle(unselectStyle);
+            }
+        });
+
+        imagePazzle3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                s = Images.AUTUMN;
+                imagePazzle2.setStyle(unselectStyle);
+                imagePazzle3.setStyle(selectStyle);
+                imagePazzle4.setStyle(unselectStyle);
+                imagePazzle1.setStyle(unselectStyle);
+            }
+        });
+
+        imagePazzle4.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                s = Images.WINTER;
+                imagePazzle2.setStyle(unselectStyle);
+                imagePazzle3.setStyle(unselectStyle);
+                imagePazzle4.setStyle(selectStyle);
+                imagePazzle1.setStyle(unselectStyle);
             }
         });
 
@@ -251,6 +299,12 @@ public class dqw extends Application {
                 break;
             case VOLCANO:
                 imageURL = "volcano.jpg";
+                break;
+            case AUTUMN:
+                imageURL = "autmn.jpg";
+                break;
+            case WINTER:
+                imageURL = "winter.jpg";
                 break;
             default:
                 imageURL = "puzzle.jpeg";

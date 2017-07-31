@@ -5,5 +5,7 @@ package Main;
  */
 public enum Images {
     BEACH,
-    VOLCANO;
+    VOLCANO,
+    AUTUMN,
+    WINTER;
 }

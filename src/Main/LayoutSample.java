@@ -292,6 +292,7 @@ public class LayoutSample extends Application {
             @Override
             public void handle(ActionEvent event) {
                 try {
+                    flagSwitcher = true;
                     dqw.start(primaryStage);
                 } catch (Exception e) {
                     e.printStackTrace();
