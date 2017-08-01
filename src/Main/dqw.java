@@ -116,7 +116,8 @@ public class dqw extends Application {
         back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                LayoutSample.flagSwitcher = true;
+                LayoutSample.disableOnHover = false;
                 layoutSample.start(primaryStage);
             }
         });

@@ -75,6 +75,7 @@ public class LayoutSample extends Application {
 
     static boolean flag = false;
     static boolean flagSwitcher = true;
+    static boolean disableOnHover = false;
     static Color text = Color.web("#ffffff");
     static int timer = 25;
     static String imageURL = "https://s-media-cache-ak0.pinimg.com/originals/3c/c7/29/3cc729139e45856c382a8a674366d9d7.jpg";
@@ -214,7 +215,9 @@ public class LayoutSample extends Application {
         Media media = new Media(path);
         Media media1 = new Media(LayoutSample.class.getResource("song1.mp3").toString());
         Media media2 = new Media(LayoutSample.class.getResource("theme.mp3").toString());
-        final MediaPlayer[] mp = {new MediaPlayer(media), new MediaPlayer(media1), new MediaPlayer(media2)};
+        Media media3 = new Media(LayoutSample.class.getResource("secret.mp3").toString());
+        Media media4 = new Media(LayoutSample.class.getResource("secret2.mp3").toString());
+        final MediaPlayer[] mp = {new MediaPlayer(media), new MediaPlayer(media1), new MediaPlayer(media2), new MediaPlayer(media3), new MediaPlayer(media4)};
 
         song1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -236,7 +239,24 @@ public class LayoutSample extends Application {
         });
 
         MenuItem song3 = new MenuItem("Secret song #1");
+        song3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                StopMusic.fire();
+                mp[3].play();
+                System.out.println(Thread.currentThread().getName());
+            }
+        });
+
         MenuItem song4 = new MenuItem("Secret song #2");
+        song4.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                StopMusic.fire();
+                mp[4].play();
+                System.out.println(Thread.currentThread().getName());
+            }
+        });
 
 
         menuButton.getItems().addAll(song1, song2);
@@ -281,9 +301,10 @@ public class LayoutSample extends Application {
         StopMusic.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                mp[0].stop();
-                mp[1].stop();
-                mp[2].stop();
+
+                for (int i = 0; i < mp.length; i++) {
+                    mp[i].stop();
+                }
             }
         });
 
@@ -291,7 +312,6 @@ public class LayoutSample extends Application {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    flagSwitcher = true;
                     dqw.start(primaryStage);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -334,10 +354,12 @@ public class LayoutSample extends Application {
                     Task<Void> task = new Task<Void>() {
                         @Override
                         public Void call() throws Exception {
+                            sorting.setDisable(true);
                             for (int i = 1; i <= 150; i++) {
                                 shufflePuzzle(list);
                                 Thread.sleep(25);
                             }
+                            sorting.setDisable(false);
                             shuffleText.setText("shuffling is complete. Good luck!!!");
                             Thread.sleep(2000);
                             shuffleText.setText("");
@@ -351,14 +373,8 @@ public class LayoutSample extends Application {
         set.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+
                     imageButtons(dqw);
-                    if(!flagSwitcher){
-//                       primaryStage.setWidth(1600);
-//                        layout1.getChildren().addAll(imagePazzleView);
-                    }else{
-//                        primaryStage.setWidth(800);
-//                        layout1.getChildren().remove(imagePazzleView);
-                    }
                 }
             });
 
@@ -493,24 +509,27 @@ public class LayoutSample extends Application {
 
     public static void mouseOnHover(Button button, String onHover, Color textOnHover, String styleSet, Color text){
 
-        if(flagSwitcher) {
+
             if (button.getId() != "0") {
                 button.setOnMouseMoved(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
+                        if(!disableOnHover) {
                         button.setStyle(onHover);
                         button.setTextFill(textOnHover);
-
+                        }
                     }
                 });
-            }
+
 
             if (button.getId() != "0") {
                 button.setOnMouseExited(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
-                        button.setStyle(styleSet);
-                        button.setTextFill(text);
+                        if(!disableOnHover) {
+                            button.setStyle(styleSet);
+                            button.setTextFill(text);
+                        }
                     }
                 });
             }
@@ -872,7 +891,7 @@ public class LayoutSample extends Application {
         ArrayList<ImageView> iList = o.viewGenerator();
 
         if(flagSwitcher) {
-
+            disableOnHover = true;
             list.get(0).setGraphic(iList.get(0));
             list.get(0).setStyle(imageStyle);
             list.get(0).setText(null);
@@ -934,9 +953,11 @@ public class LayoutSample extends Application {
             list.get(14).setGraphic(iList.get(11));
             list.get(14).setStyle(imageStyle);
             list.get(14).setText(null);
-
             flagSwitcher = !flagSwitcher;
+
         }else{
+            disableOnHover = false;
+
             list.get(0).setText("1");
             list.get(0).setGraphic(null);
             list.get(0).setStyle(styleSet);
